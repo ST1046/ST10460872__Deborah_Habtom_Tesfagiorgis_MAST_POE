@@ -73,4 +73,4 @@ const App: React.FC<AppProps> = () => {
   );
 };
 
-export default App
+export default App;

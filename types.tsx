@@ -21,4 +21,4 @@ export type RootStackParamList = {
 // <!--Code Attribution-->
 // <!--Yusra, A. 2024.
 // This code has been adapted from classwrok taught by Yusra.
-// Please see the above refrence for the MAST Module Manual to find adapted source code-->
+// Please see the above refrence for the MAST Module Manual to find adapted source code--> 
