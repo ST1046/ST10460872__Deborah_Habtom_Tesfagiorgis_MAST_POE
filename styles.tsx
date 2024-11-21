@@ -56,6 +56,12 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 5,
     },
+    removeButton: {
+        color: 'red',
+        marginTop: 5,
+        fontSize: 14,
+        textDecorationLine: 'underline',
+    },
 
     itemName: {
         fontSize: 18,

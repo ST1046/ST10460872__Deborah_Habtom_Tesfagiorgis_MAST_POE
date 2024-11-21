@@ -71,4 +71,4 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ menuItems }) => {
     );
 };
 
-export default MenuScreen;
+export default MenuScreen; 

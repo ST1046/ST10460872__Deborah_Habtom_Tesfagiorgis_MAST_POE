@@ -85,5 +85,4 @@ const StaffScreen: React.FC<StaffScreenProps> = ({ addMenuItem }) => {
     );
 };
 
-export default StaffScreen;
-
+export default StaffScreen
