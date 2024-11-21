@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { MenuItem } from './types'; // Assuming MenuItem type is defined
-import { styles } from './styles'; // Assuming styles are defined
+import { MenuItem } from './types';
+import { styles } from './styles';
 
 // Code Attribution-->
 // TITLE: MAST5112/d/p/w MODULE MANUAL/GUIDE 2024-->
@@ -18,8 +18,8 @@ import { styles } from './styles'; // Assuming styles are defined
 
 interface StaffScreenProps {
     addMenuItem: (item: MenuItem) => void;
-    removeMenuItem: (id: string) => void; // Assuming this is passed in as a prop to remove items
-    menuItems: MenuItem[]; // Menu items should be passed as a prop for FlatList rendering
+    removeMenuItem: (id: string) => void;
+    menuItems: MenuItem[];
 }
 
 const StaffScreen: React.FC<StaffScreenProps> = ({ addMenuItem, removeMenuItem, menuItems }) => {
@@ -31,7 +31,7 @@ const StaffScreen: React.FC<StaffScreenProps> = ({ addMenuItem, removeMenuItem, 
     const handleAddItem = () => {
         if (name && price && course && description) {
             const newItem: MenuItem = {
-                id: Date.now().toString(), // Ensure unique id
+                id: Date.now().toString(),
                 name,
                 price: parseFloat(price),
                 course,
