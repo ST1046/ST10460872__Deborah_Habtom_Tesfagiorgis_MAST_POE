@@ -4,34 +4,28 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WelcomeScreen from './WelcomeScreen';
 import MenuScreen from './MenuScreen';
+import FilterScreen from './FilterScreen';
 import StaffScreen from './StaffScreen';
 import { MenuItem } from './types';
 import { styles } from './styles';
 
-// Code Attribution-->
-// TITLE: MAST5112/d/p/w MODULE MANUAL/GUIDE 2024-->
-// Author: The Independent Institute of Education (Pty) Ltd 2024-->
-// Date: 2024 -->
-// Version: (First Edition: 2012)-->
-// Avialabe:(https://advtechonline.sharepoint.com/:w:/r/sites/TertiaryStudents/_layouts/15/Doc.aspx?sourcedoc=%7B8B4938D0-6B6B-44E4-A2D8-5551E6D3AE27%7D&file=MAST5112MM.docx&action=default&mobileredirect=true)
-
-// <!--Code Attribution-->
-// <!--Yusra, A. 2024.
-// This code has been adapted from classwrok taught by Yusra.
-// Please see the above refrence for the MAST Module Manual to find adapted source code-->
-
 const Tab = createBottomTabNavigator();
 
-interface AppProps {
-  menuItems: MenuItem[];
-  addMenuItem: (item: MenuItem) => void;
-}
+const App: React.FC = () => {
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([
+    { id: '1', name: 'Salad', price: 50, course: 'Appetizer', description: 'Fresh greens with dressing' },
+    { id: '2', name: 'Steak', price: 150, course: 'Main', description: 'Grilled steak with sides' },
+    { id: '3', name: 'Cake', price: 70, course: 'Dessert', description: 'Chocolate layered cake' },
+  ]);
 
-const App: React.FC<AppProps> = () => {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-
+  // Function to add a menu item
   const addMenuItem = (item: MenuItem) => {
     setMenuItems((prevItems) => [...prevItems, item]);
+  };
+
+  // Function to remove a menu item by ID
+  const removeMenuItem = (id: string) => {
+    setMenuItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   return (
@@ -39,7 +33,7 @@ const App: React.FC<AppProps> = () => {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
-            let iconName: string = 'home-outline';
+            let iconName = 'home-outline';
 
             if (route.name === 'Welcome') {
               iconName = 'home-outline';
@@ -47,6 +41,8 @@ const App: React.FC<AppProps> = () => {
               iconName = 'restaurant-outline';
             } else if (route.name === 'Staff') {
               iconName = 'person-add-outline';
+            } else if (route.name === 'Filter') {
+              iconName = 'filter-outline';
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -64,8 +60,19 @@ const App: React.FC<AppProps> = () => {
           options={{ headerShown: true }}
         />
         <Tab.Screen
+          name="Filter"
+          children={() => <FilterScreen menuItems={menuItems} />}
+          options={{ headerShown: true }}
+        />
+        <Tab.Screen
           name="Staff"
-          children={() => <StaffScreen addMenuItem={addMenuItem} />}
+          children={() => (
+            <StaffScreen
+              menuItems={menuItems}
+              addMenuItem={addMenuItem}
+              removeMenuItem={removeMenuItem}
+            />
+          )}
           options={{ headerShown: true }}
         />
       </Tab.Navigator>

@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { MenuItem } from './types';
-import { styles } from './styles';
+import { MenuItem } from './types'; // Assuming MenuItem type is defined
+import { styles } from './styles'; // Assuming styles are defined
 
 // Code Attribution-->
 // TITLE: MAST5112/d/p/w MODULE MANUAL/GUIDE 2024-->
 // Author: The Independent Institute of Education (Pty) Ltd 2024-->
 // Date: 2024 -->
 // Version: (First Edition: 2012)-->
-// Avialabe:(https://advtechonline.sharepoint.com/:w:/r/sites/TertiaryStudents/_layouts/15/Doc.aspx?sourcedoc=%7B8B4938D0-6B6B-44E4-A2D8-5551E6D3AE27%7D&file=MAST5112MM.docx&action=default&mobileredirect=true)
+// Available: (https://advtechonline.sharepoint.com/:w:/r/sites/TertiaryStudents/_layouts/15/Doc.aspx?sourcedoc=%7B8B4938D0-6B6B-44E4-A2D8-5551E6D3AE27%7D&file=MAST5112MM.docx&action=default&mobileredirect=true)
 
 // <!--Code Attribution-->
 // <!--Yusra, A. 2024.
-// This code has been adapted from classwrok taught by Yusra.
-// Please see the above refrence for the MAST Module Manual to find adapted source code-->
+// This code has been adapted from classwork taught by Yusra.
+// Please see the above reference for the MAST Module Manual to find adapted source code-->
 
 interface StaffScreenProps {
     addMenuItem: (item: MenuItem) => void;
+    removeMenuItem: (id: string) => void; // Assuming this is passed in as a prop to remove items
+    menuItems: MenuItem[]; // Menu items should be passed as a prop for FlatList rendering
 }
 
-const StaffScreen: React.FC<StaffScreenProps> = ({ addMenuItem }) => {
+const StaffScreen: React.FC<StaffScreenProps> = ({ addMenuItem, removeMenuItem, menuItems }) => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [course, setCourse] = useState('');
@@ -29,7 +31,7 @@ const StaffScreen: React.FC<StaffScreenProps> = ({ addMenuItem }) => {
     const handleAddItem = () => {
         if (name && price && course && description) {
             const newItem: MenuItem = {
-                id: Date.now().toString(),
+                id: Date.now().toString(), // Ensure unique id
                 name,
                 price: parseFloat(price),
                 course,
@@ -40,7 +42,20 @@ const StaffScreen: React.FC<StaffScreenProps> = ({ addMenuItem }) => {
             setPrice('');
             setCourse('');
             setDescription('');
+        } else {
+            Alert.alert("Incomplete form", "Please fill all the fields", [{ text: "OK" }]);
         }
+    };
+
+    const handleRemoveItem = (id: string) => {
+        Alert.alert(
+            "Confirm Delete",
+            "Are you sure you want to delete this item?",
+            [
+                { text: "Cancel" },
+                { text: "Delete", onPress: () => removeMenuItem(id) },
+            ]
+        );
     };
 
     return (
@@ -81,6 +96,26 @@ const StaffScreen: React.FC<StaffScreenProps> = ({ addMenuItem }) => {
             <TouchableOpacity style={styles.menuButton} onPress={handleAddItem}>
                 <Text style={styles.menuButtonText}>Add Item</Text>
             </TouchableOpacity>
+
+            <Text style={styles.heading}>Menu Items</Text>
+            <FlatList
+                data={menuItems}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <View style={styles.itemContainer}>
+                        <Text style={styles.itemText}>{item.name}</Text>
+                        <Text style={styles.itemText}>Price: {item.price}</Text>
+                        <Text style={styles.itemText}>Course: {item.course}</Text>
+                        <Text style={styles.itemText}>Description: {item.description}</Text>
+                        <TouchableOpacity
+                            style={styles.deleteButton}
+                            onPress={() => handleRemoveItem(item.id)}
+                        >
+                            <Text style={styles.deleteButtonText}>Delete</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+            />
         </View>
     );
 };

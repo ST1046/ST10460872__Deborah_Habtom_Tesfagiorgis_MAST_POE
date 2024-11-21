@@ -56,13 +56,6 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 5,
     },
-    removeButton: {
-        color: 'red',
-        marginTop: 5,
-        fontSize: 14,
-        textDecorationLine: 'underline',
-    },
-
     itemName: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -70,14 +63,17 @@ export const styles = StyleSheet.create({
     },
     itemPrice: {
         fontSize: 16,
+        fontWeight: 'bold',
         color: '#D46A6A',
     },
     itemCourse: {
         fontSize: 14,
+        fontWeight: 'bold',
         color: '#777',
     },
     itemDescription: {
         fontSize: 14,
+        fontWeight: 'bold',
         color: '#555',
         marginTop: 5,
     },
@@ -96,8 +92,6 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         color: '#000',
     },
-
-    // Summary Container styles
     summaryContainer: {
         backgroundColor: '#fff',
         padding: 15,
@@ -119,5 +113,26 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 24,
         textAlign: 'center',
+    },
+    itemContainer: {
+        padding: 10,
+        marginVertical: 5,
+        backgroundColor: '#333',
+        borderRadius: 5,
+    },
+    itemText: {
+        fontSize: 16,
+        color: 'white',
+    },
+    deleteButton: {
+        marginTop: 5,
+        backgroundColor: '#4C84FF',
+        padding: 8,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    deleteButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
     },
 }); 
