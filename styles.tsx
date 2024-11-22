@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
         marginBottom: 20,
-        textAlign: 'left'
+        textAlign: 'left',
     },
     input: {
         backgroundColor: '#fff',
@@ -135,4 +135,28 @@ export const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
     },
-}); 
+
+    todaysMenuContainer: {
+        backgroundColor: '#2C2C2C',
+        padding: 20,
+        borderRadius: 10,
+        marginBottom: 20,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+    },
+    todaysMenuHeading: {
+        color: '#F1F1F1',
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10,
+    },
+    todaysMenuText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#F1F1F1',
+        textAlign: 'center',
+    },
+});

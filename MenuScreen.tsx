@@ -20,8 +20,23 @@ interface MenuScreenProps {
 }
 
 const MenuScreen: React.FC<MenuScreenProps> = ({ menuItems }) => {
+    // Calculate total number of items and average price
+    const totalItems = menuItems.length;
+    const averagePrice = totalItems
+        ? menuItems.reduce((acc, item) => acc + item.price, 0) / totalItems
+        : 0;
+
     return (
         <View style={styles.container}>
+            {/* Today's Menu Container */}
+            <View style={styles.todaysMenuContainer}>
+                <Text style={styles.todaysMenuHeading}>Today's Menu:</Text>
+                <Text style={styles.todaysMenuText}>Dishes Available: {totalItems}</Text>
+                <Text style={styles.todaysMenuText}>
+                    Average Price: R{averagePrice.toFixed(2)}
+                </Text>
+            </View>
+
             <ScrollView>
                 {menuItems.map((item) => (
                     <View key={item.id} style={styles.menuItem}>
